@@ -6,11 +6,12 @@ This is a core package of the UBootstrap series of libraries used for easily boo
 
 1. Clone this repo and use it as a base for your new project
 2. Install `npm` and `yarn`
-3. Update `package.json` to include UBootstrap.Core like so  
-```
-    "ubootstrap-core": "ssh://github.com/minhhh/UBoostrap.Core.git#v0.0.1"
-```
-1. Run `npm run unity` and wait for it to install all necessary packages
+3. Update `package.json` to include UBootstrap.Core like so
+
+    ```
+        "ubootstrap-core": "ssh://github.com/minhhh/UBoostrap.Core.git#v0.0.1"
+    ```
+4. Run `npm run unity` and wait for it to install all necessary packages
 
 
 ## Documentation
