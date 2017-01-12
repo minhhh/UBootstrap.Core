@@ -21,6 +21,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.2**
+
+* Fix `Setting` infinite recursion issue
+
 **0.0.1**
 
 * Add `Setting`, `PathSetting`, `FileSystemHelper`, `ReflectionHelper`
