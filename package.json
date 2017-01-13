@@ -1,6 +1,6 @@
 {
   "name": "uboostrap-core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Core plugin code to bootstrap your Unity project",
   "main": "index.js",
   "author": "Ha.Minh",

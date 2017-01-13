@@ -8,6 +8,10 @@ namespace UBootstrap
     public static class FileSystemHelper
     {
         #if UNITY_EDITOR
+        /// <summary>
+        /// Makes a folder in Assets folder
+        /// </summary>
+        /// <param name="path">The path inside Assets</param>
         public static void MakeFolderInAssets (string path)
         {
             string[] folderNames = path.Split ('/');
