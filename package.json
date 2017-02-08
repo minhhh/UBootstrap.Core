@@ -1,7 +1,7 @@
 {
   "name": "uboostrap-core",
-  "version": "0.0.3",
-  "description": "Core plugin code to bootstrap your Unity project",
+  "version": "0.0.4",
+  "description": "This library lets you draw properties nicely in Unity Editor",
   "main": "index.js",
   "author": "Ha.Minh",
   "license": "MIT",
@@ -11,10 +11,11 @@
   ],
   "scripts": {
     "postinstall": "node index.js",
-    "unity": "rm -fr node_modules && DIR=`pwd` yarn install --flat --prod"
+    "unity": "rm -fr node_modules && DIR=`pwd` yarn install --flat --prod --verbose"
   },
   "dependencies": {
-    "ncp": "^2.0.0",
-    "mkdirp": "^0.5.1"
+    "minimist": "ssh://github.com/substack/minimist.git#0.0.8",
+    "mkdirp": "ssh://github.com/substack/node-mkdirp.git#0.5.1",
+    "ncp": "ssh://github.com/AvianFlu/ncp.git#v2.0.0"
   }
 }

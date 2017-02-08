@@ -21,6 +21,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.4**
+
+* Add Consolation, MeshSaver
+
 **0.0.3**
 
 * Add EnumHelper, GameObjectHelper, GCFreeDictionary, LimitedSizeStack, GameObjectExtensions
