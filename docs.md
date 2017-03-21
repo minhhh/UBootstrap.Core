@@ -15,3 +15,9 @@ This is a `MonoBehaviour` which can be attached to any scene object. It will all
 
 ### MeshSaver
 This is an Editor script which will allow you to save any mesh using the context menu of the `MeshFilter` component.
+
+### MeshVisualizerWindow
+Visualize Mesh in Scene view
+
+### SceneViewWindow
+A simple Editor window to quickly switch between build scenes
