@@ -29,7 +29,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace UBootstrap
+namespace UBootstrap.Editor
 {
     public static class MeshSaverEditor
     {
