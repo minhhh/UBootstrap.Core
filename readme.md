@@ -23,6 +23,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.6**
+
+* Add PlayerPrefsEditor, AssetReferencerFinder
+
 **0.0.5**
 
 * Add MeshVisualizerWindow, SceneViewWindow

@@ -21,3 +21,9 @@ Visualize Mesh in Scene view
 
 ### SceneViewWindow
 A simple Editor window to quickly switch between build scenes
+
+### PlayerPrefsEditor
+A simple Editor window to delete PlayerPrefs
+
+### AssetReferencerFinder
+Quickly find references to an asset

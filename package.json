@@ -1,6 +1,6 @@
 {
   "name": "uboostrap-core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "This library lets you draw properties nicely in Unity Editor",
   "main": "index.js",
   "author": "Ha.Minh",
