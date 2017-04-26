@@ -34,50 +34,60 @@ namespace UBootstrap
         // Slow. Don't use in Update
         public static GameObject Find (string name)
         {
-            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
             return objects.First (go => go.name == name && !IsPrefab (go as GameObject)) as GameObject;
         }
 
         // Slow. Don't use in Update
         public static T FindObjectOfType<T> () where T:Object
         {
-            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(T));
+            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(T));
             return objects.First (go => !IsPrefab (go)) as T;
         }
 
         // Slow. Don't use in Update
         public static GameObject FindObjectOfType (System.Type T)
         {
-            Object[] objects = Resources.FindObjectsOfTypeAll (T);
+            Object [] objects = Resources.FindObjectsOfTypeAll (T);
             return objects.First (go => !IsPrefab (go)) as GameObject;
         }
 
         // Slow. Don't use in Update
         public static T[] FindObjectsOfType<T> () where T:Object
         {
-            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(T));
+            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(T));
             return objects.Where (go => !IsPrefab (go)).Select (go => go as T).ToArray ();
         }
 
         // Slow. Don't use in Update
         public static GameObject[] FindObjectsOfType (System.Type T)
         {
-            Object[] objects = Resources.FindObjectsOfTypeAll (T);
+            Object [] objects = Resources.FindObjectsOfTypeAll (T);
             return objects.Where (go => !IsPrefab (go)).Select (go => go as GameObject).ToArray ();
         }
 
         // Slow. Don't use in Update
         public static GameObject FindGameObjectWithTag (string tag)
         {
-            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
             return objects.Select (go => go as GameObject).First (go => go.CompareTag (tag) && !IsPrefab (go));
         }
 
         // Slow. Don't use in Update
         public static GameObject[] FindGameObjectsWithTag (string tag)
         {
-            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
             return objects.Select (go => go as GameObject).Where (go => go.CompareTag (tag) && !IsPrefab (go)).ToArray ();
+        }
+
+        public static bool IsNull (object o)
+        {
+            return o == null || o.Equals (null);
+        }
+
+        public static bool IsNotNull (object o)
+        {
+            return !IsNull (o);
         }
     }
 }
