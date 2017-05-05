@@ -2,49 +2,50 @@
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 
 namespace UBootstrap.Editor
 {
-    public class AssetReferencerFinder : EditorWindow
+    public class MissingScriptFinder : EditorWindow
     {
         private Vector2 scrollPos;
         Dictionary<ReferencerAssetParam, List<UnityEngine.Object>> referencesByTypes = new Dictionary<ReferencerAssetParam, List<UnityEngine.Object>> ();
+        bool OnlyActiveScene = true;
 
-        [MenuItem ("UBootstrap/Rererence Finder")]
+        [MenuItem ("UBootstrap/Missing Script Finder")]
         static void Init ()
         {
-            AssetReferencerFinder window = EditorWindow.GetWindow <AssetReferencerFinder> ("Reference Finder");
+            MissingScriptFinder window = EditorWindow.GetWindow <MissingScriptFinder> ("Missing Script Finder");
             window.Show ();
         }
 
-        AssetReferencerFinder ()
+        MissingScriptFinder ()
         {
         }
 
         void OnGUI ()
         {
-            if (Selection.activeObject == null) {
-                GUI.color = Color.red;
-                GUILayout.Label ("Please select an object", EditorStyles.wordWrappedLabel);
-                return;
-            }
-
             GUI.color = Color.white;
 
+            OnlyActiveScene = GUILayout.Toggle (OnlyActiveScene, "Only Active Scene", GUILayout.Width (300));
+
             if (GUILayout.Button ("Find")) {
-                List<string> objectsPath = ListUpAllObjectPath ();
-                List<UnityEngine.Object> referencers = FindReferencersForObject (Selection.activeObject, objectsPath);
+                List<UnityEngine.Object> referencers;
+                if (OnlyActiveScene) {
+                    referencers = FindMissingScriptObjectsInActiveScene ();
+                } else {
+                    List<string> objectsPath = ListUpAllObjectPath ();
+                    referencers = FindAllMissingScriptObjects (objectsPath);
+                }
                 referencesByTypes = AggregateReferencerByAssetType (referencers);
             }
 
             scrollPos = EditorGUILayout.BeginScrollView (scrollPos);
             EditorGUILayout.BeginVertical ();
 
-            EditorGUILayout.LabelField (string.Format ("Object [{0}]", AssetDatabase.GetAssetPath (Selection.activeObject)));
-            EditorGUILayout.Space ();
-
             GUI.color = Color.red;
-            EditorGUILayout.LabelField (string.Format ("Total Referencers: {0}", referencesByTypes.Sum ((x) => x.Value.Count)));
+            EditorGUILayout.LabelField (string.Format ("Total Missing Script Objects: {0}", referencesByTypes.Sum ((x) => x.Value.Count)));
 
             var keys = referencesByTypes.Keys.ToList ();
             for (int i = 0; i < keys.Count; i++) {
@@ -80,18 +81,12 @@ namespace UBootstrap.Editor
         static readonly ReferencerAssetParam[] referencerAssetParams = new ReferencerAssetParam[] {
             new ReferencerAssetParam ("Assets", "Scene", ".unity"),
             new ReferencerAssetParam ("Assets", "Prefab", ".prefab"),
-            new ReferencerAssetParam ("Assets", "Material", ".mat"),
-            new ReferencerAssetParam ("Assets", "Shader", ".shader"),
-            new ReferencerAssetParam ("Assets", "ScriptableObject", ".asset"),
-            new ReferencerAssetParam ("Assets", "Flare", ".flare"),
-            new ReferencerAssetParam ("Assets", "AnimatorController", ".controller"),
-            new ReferencerAssetParam ("Assets", "AnimatorOverrideController", ".overrideController"),
-            new ReferencerAssetParam ("Assets", "Cubemap", ".cubemap"),
-            new ReferencerAssetParam ("Assets", "ComputeShader", ".compute"),
-            new ReferencerAssetParam ("Assets", "AvatorMask", ".mask"),
-            new ReferencerAssetParam ("Assets", "GUISkin", ".guiskin"),
+            //            new ReferencerAssetParam ("Assets", "ScriptableObject", ".asset") // does not work with scriptable object yet
+            //            new ReferencerAssetParam ("Assets", "AnimatorController", ".controller"),
+            //            new ReferencerAssetParam ("Assets", "AnimatorOverrideController", ".overrideController")
         };
 
+        static readonly ReferencerAssetParam referencerAssetParamGO = new ReferencerAssetParam ("Assets", "GameObject in ActiveScene", "");
 
         private static List<string> ListUpAllObjectPath ()
         {
@@ -126,32 +121,49 @@ namespace UBootstrap.Editor
             var result = new Dictionary<ReferencerAssetParam, List<UnityEngine.Object>> ();
             foreach (ReferencerAssetParam param in referencerAssetParams) {
                 result [param] = GetReferencerByAssetType (param.assetType, param.assetExtension, referencerObjects);
+                referencerObjects = referencerObjects.Except (result [param]).ToList ();
             }
+
+            result [referencerAssetParamGO] = referencerObjects.Where (x => x != null).ToList ();
 
             return result;
         }
 
-        private static List<UnityEngine.Object> FindReferencersForObject (UnityEngine.Object referencee, List<string> objectPath)
+        private static List<UnityEngine.Object> FindMissingScriptObjectsInActiveScene ()
+        {
+            var activeScene = SceneManager.GetActiveScene ();
+            return FindMissingScriptObjectInScene (activeScene);
+        }
+
+        private static List<UnityEngine.Object> FindAllMissingScriptObjects (List<string> objectPaths)
         {
             List<UnityEngine.Object> results = new List<UnityEngine.Object> ();
 
+            // Store the active scene
+            var activeScene = SceneManager.GetActiveScene ();
+            string activeScenePath = string.Empty;
+            if (activeScene != null) {
+                activeScenePath = activeScene.path;
+            }
+
             int index = 0;
-            foreach (string path in objectPath) {
+            foreach (string path in objectPaths) {
                 if (index % 10 == 0) {
-                    string progressBarSubTile = string.Format ("[{0}/{1}] : {2}", index + 1, objectPath.Count, path);
+                    string progressBarSubTile = string.Format ("[{0}/{1}] : {2}", index + 1, objectPaths.Count, path);
                     if (UnityEditor.EditorUtility.DisplayCancelableProgressBar (
-                            "find referencer object", progressBarSubTile, (float)(index + 1) / objectPath.Count)) {
+                            "find referencer object", progressBarSubTile, (float)(index + 1) / objectPaths.Count)) {
                         break;
                     }
                 }
 
                 UnityEngine.Object referencer = AssetDatabase.LoadAssetAtPath (path, typeof(UnityEngine.Object));
-
-                if (IsDependentOn (referencer, referencee)) {
-                    results.Add (referencer);
-                }
+                results.AddRange (FindMissingScriptObjectInObject (referencer));
 
                 index++;
+            }
+
+            if (activeScenePath != string.Empty) {
+                EditorSceneManager.OpenScene (activeScenePath);
             }
 
             Resources.UnloadUnusedAssets ();
@@ -161,26 +173,48 @@ namespace UBootstrap.Editor
             return results;
         }
 
-        private static bool IsDependentOn (UnityEngine.Object referencer, UnityEngine.Object referencee)
+        private static List<UnityEngine.Object> FindMissingScriptObjectInObject (Object o)
         {
-            if (referencee == referencer) {
-                return false;
+            if (o is GameObject) {
+                return FindMissingScriptObjectInGO (o as GameObject);
+            } else if (o is SceneAsset) {
+                if (EditorApplication.SaveCurrentSceneIfUserWantsTo ()) {
+                    EditorSceneManager.OpenScene (AssetDatabase.GetAssetPath (o));
+                    var result = FindMissingScriptObjectInScene (SceneManager.GetActiveScene ());
+                    if (result.Count > 0) {
+                        result.Add (o);
+                    }
+                    return result;
+                }
             }
 
-            string referencerPath = AssetDatabase.GetAssetPath (referencer);
-            string[] assetPaths = new string[1] {
-                referencerPath,
-            };
+            return new List<UnityEngine.Object> ();
+        }
 
-            string referenceePath = AssetDatabase.GetAssetPath (referencee);
-            string[] dependencies = AssetDatabase.GetDependencies (assetPaths);
-
-            bool result = false;
-            foreach (string depend in dependencies) {
-                if (depend == referenceePath) {
-                    result = true;
+        private static List<UnityEngine.Object> FindMissingScriptObjectInGO (GameObject g)
+        {
+            var result = new List<UnityEngine.Object> ();
+            Component[] components = g.GetComponents<Component> ();
+            for (int i = 0; i < components.Length; i++) {
+                if (components [i] == null) {
+                    result.Add (g);
                     break;
                 }
+            }
+
+            foreach (Transform child in g.transform) {
+                result.AddRange (FindMissingScriptObjectInGO (child.gameObject));
+            }
+
+            return result;
+        }
+
+        private static List<UnityEngine.Object> FindMissingScriptObjectInScene (Scene s)
+        {
+            var result = new List<UnityEngine.Object> ();
+
+            foreach (GameObject go in s.GetRootGameObjects()) {
+                result.AddRange (FindMissingScriptObjectInGO (go));
             }
 
             return result;
@@ -198,7 +232,9 @@ namespace UBootstrap.Editor
             List<string> scenePath = new List<string> ();
 
             foreach (string guid in guids) {
+
                 string assetPath = AssetDatabase.GUIDToAssetPath (guid);
+
                 if (!assetPath.EndsWith (assetFileExtension)) {
                     continue;
                 }
