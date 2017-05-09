@@ -23,25 +23,29 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.8**
+
+* Add `ConstantGenerator`
+
 **0.0.7**
 
-* Add MissignScriptFinder
+* Add `MissingScriptFinder`
 
 **0.0.6**
 
-* Add PlayerPrefsEditor, AssetReferencerFinder
+* Add `PlayerPrefsEditor`, `AssetReferencerFinder`
 
 **0.0.5**
 
-* Add MeshVisualizerWindow, SceneViewWindow
+* Add `MeshVisualizerWindow`, `SceneViewWindow`
 
 **0.0.4**
 
-* Add Consolation, MeshSaver
+* Add `Consolation`, `MeshSaver`
 
 **0.0.3**
 
-* Add EnumHelper, GameObjectHelper, GCFreeDictionary, LimitedSizeStack, GameObjectExtensions
+* Add `EnumHelper`, `GameObjectHelper`, `GCFreeDictionary`, `LimitedSizeStack`, `GameObjectExtensions`
 
 **0.0.2**
 

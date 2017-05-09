@@ -1,4 +1,8 @@
 ﻿using System.IO;
+using System;
+using UnityEngine;
+
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -23,6 +27,17 @@ namespace UBootstrap
                 }
                 currentPath = folderPath;
             }
+        }
+
+        public static void SaveToFileInAssets (string content, string path)
+        {
+            try {
+                File.WriteAllText (Path.Combine(Application.dataPath, path), content);
+                AssetDatabase.Refresh ();
+            } catch (Exception e) {
+                Debug.LogError ("An error occurred while saving file: " + e);
+            }
+
         }
         #endif
     }
