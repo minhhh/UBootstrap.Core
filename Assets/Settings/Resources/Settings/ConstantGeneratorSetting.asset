@@ -11,3 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde6abd5dcd0b4aa0a678988119cce76, type: 3}
   m_Name: ConstantGeneratorSetting
   m_EditorClassIdentifier: 
+  Location: 
+  Namespace: Const
+  TagsClassName: TagConstant
+  LayersClassName: LayerConstant
+  SortingLayersClassName: SortingLayerConstant
