@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
+﻿using UnityEditor;
 using System;
 using UnityEditorInternal;
 using System.Reflection;
 using System.Text;
 using UBootstrap;
+using System.IO;
+using System.Collections.Generic;
 
 namespace UBootstrap.Editor
 {
@@ -17,6 +17,7 @@ namespace UBootstrap.Editor
             GenerateTags ();
             GenerateLayers ();
             GenerateSortingLayers ();
+            GenerateScenes ();
         }
 
         [MenuItem ("UBootstrap/Constant/Generate Tags")]
@@ -37,6 +38,12 @@ namespace UBootstrap.Editor
             Generate (ConstantGeneratorSetting.Instance.Namespace, ConstantGeneratorSetting.Instance.SortingLayersClassName, ConstantGeneratorSetting.Instance.Location, GetSortingLayerNames ());
         }
 
+        [MenuItem ("UBootstrap/Constant/Generate Scenes")]
+        public static void GenerateScenes ()
+        {
+            Generate (ConstantGeneratorSetting.Instance.Namespace, ConstantGeneratorSetting.Instance.ScenesClassName, ConstantGeneratorSetting.Instance.Location, GetSceneNames ());
+        }
+
         private static void Generate (string namespaceName, string className, string location, string[] constants)
         {
             StringBuilder sb = new StringBuilder ();
@@ -45,12 +52,12 @@ namespace UBootstrap.Editor
             sb.AppendFormat ("    public partial class {0}\n", className);
             sb.Append ("    {\n");
             foreach (var c in constants) {
-                sb.AppendFormat ("        public const string {0} = \"{1}\";\n", c.Replace(" ", string.Empty), c);
+                sb.AppendFormat ("        public const string {0} = \"{1}\";\n", c.Replace (" ", string.Empty), c);
             }
             sb.Append ("    }\n");
             sb.Append ("}\n");
 
-            FileSystemHelper.SaveToFileInAssets (sb.ToString (), location + className + ".cs");
+            FileSystemHelper.SaveToFileInAssets (sb.ToString (), Path.Combine (location, className + ".cs"));
 
         }
 
@@ -61,6 +68,18 @@ namespace UBootstrap.Editor
             var sortingLayers = (string[])sortingLayersProperty.GetValue (null, new object[0]);
             return sortingLayers;
 
+        }
+
+        private static string[] GetSceneNames ()
+        {
+            List<string> scenes = new List<string> ();
+            foreach (var scene in EditorBuildSettings.scenes) {
+                if (!scene.enabled) {
+                    continue;
+                }
+                scenes.Add (Path.GetFileNameWithoutExtension (scene.path));
+            }
+            return scenes.ToArray ();
         }
 
     }

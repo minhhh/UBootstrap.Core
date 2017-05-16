@@ -1,10 +1,13 @@
 ﻿using System;
 
-static public class EnumHelper
+namespace UBootstrap
 {
-    public static int EnumToInt (Enum e)
+    static public class EnumHelper
     {
-        return (int)((object)e);
-    }
+        public static int EnumToInt (Enum e)
+        {
+            return (int)((object)e);
+        }
 
+    }
 }

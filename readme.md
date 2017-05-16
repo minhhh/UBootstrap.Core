@@ -23,6 +23,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.9**
+
+* Improve `ConstantGenerator`. Add `ListHelper`, `MathHelper`
+
 **0.0.8**
 
 * Add `ConstantGenerator`

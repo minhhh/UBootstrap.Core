@@ -23,5 +23,6 @@ namespace UBootstrap
         public string TagsClassName;
         public string LayersClassName;
         public string SortingLayersClassName;
+        public string ScenesClassName;
     }
 }
