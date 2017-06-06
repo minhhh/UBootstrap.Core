@@ -2,6 +2,7 @@
 using System.Linq;
 
 // TODO: remove linq
+using System.Collections.Generic;
 
 namespace UBootstrap
 {
@@ -35,35 +36,75 @@ namespace UBootstrap
         public static GameObject Find (string name)
         {
             Object [] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
-            return objects.First (go => go.name == name && !IsPrefab (go as GameObject)) as GameObject;
+            Object o;
+            for (int i = 0; i < objects.Length; i++) {
+                o = objects [i];
+                if (o != null && o.name.Equals (name) & !IsPrefab (o as GameObject)) {
+                    return o as GameObject;
+                }
+            }
+            return null;
         }
 
         // Slow. Don't use in Update
         public static T FindObjectOfType<T> () where T:Object
         {
             Object [] objects = Resources.FindObjectsOfTypeAll (typeof(T));
-            return objects.First (go => !IsPrefab (go)) as T;
+            Object o;
+            for (int i = 0; i < objects.Length; i++) {
+                o = objects [i];
+                if (o != null && !IsPrefab (o as Component)) {
+                    return o as T;
+                }
+            }
+            return default (T);
         }
 
         // Slow. Don't use in Update
-        public static GameObject FindObjectOfType (System.Type T)
+        public static Object FindObjectOfType (System.Type T)
         {
             Object [] objects = Resources.FindObjectsOfTypeAll (T);
-            return objects.First (go => !IsPrefab (go)) as GameObject;
+            Object o;
+            for (int i = 0; i < objects.Length; i++) {
+                o = objects [i];
+                if (o != null && !IsPrefab (o as Component)) {
+                    return o;
+                }
+            }
+            return null;
         }
 
         // Slow. Don't use in Update
         public static T[] FindObjectsOfType<T> () where T:Object
         {
             Object [] objects = Resources.FindObjectsOfTypeAll (typeof(T));
-            return objects.Where (go => !IsPrefab (go)).Select (go => go as T).ToArray ();
+            Object o;
+            var results = new List<T> ();
+            for (int i = 0; i < objects.Length; i++) {
+                o = objects [i];
+                if (o != null && !IsPrefab (o as Component)) {
+                    results.Add (o as T);
+                }
+            }
+
+            return results.ToArray ();
         }
 
         // Slow. Don't use in Update
-        public static GameObject[] FindObjectsOfType (System.Type T)
+        public static Object[] FindObjectsOfType (System.Type T)
         {
             Object [] objects = Resources.FindObjectsOfTypeAll (T);
-            return objects.Where (go => !IsPrefab (go)).Select (go => go as GameObject).ToArray ();
+
+            Object o;
+            var results = new List<Object> ();
+            for (int i = 0; i < objects.Length; i++) {
+                o = objects [i];
+                if (o != null && !IsPrefab (o)) {
+                    results.Add (o);
+                }
+            }
+
+            return results.ToArray ();
         }
 
         // Slow. Don't use in Update

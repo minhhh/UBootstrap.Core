@@ -20,8 +20,15 @@ To open this project on its own, run `rm -fr node_modules && DIR=`pwd` yarn inst
 
 All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/blob/master/docs.md)
 
-
 ## Changelog
+
+**0.0.11**
+
+* Improve GameObjectHelper
+
+**0.0.10**
+
+* Add `VectorHelper`
 
 **0.0.9**
 
