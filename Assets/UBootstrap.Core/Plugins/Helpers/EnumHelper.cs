@@ -9,5 +9,10 @@ namespace UBootstrap
             return (int)((object)e);
         }
 
+        public static bool EnumEqual (Enum a, Enum b)
+        {
+            return EnumToInt (a) == EnumToInt (b);
+        }
+
     }
 }
