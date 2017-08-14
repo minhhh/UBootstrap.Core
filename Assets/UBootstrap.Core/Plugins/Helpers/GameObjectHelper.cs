@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace UBootstrap
 {
-    public class GameObjectHelper
+    static public partial class GameObjectHelper
     {
         public static bool IsPrefab (Object o)
         {

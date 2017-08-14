@@ -22,6 +22,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.14**
+
+* Convert helpers to partial classes for easier extension
+
 **0.0.13**
 
 * Improve VectorHelper

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace UBootstrap
 {
-    static public class ListHelper
+    static public partial class ListHelper
     {
         public static bool IsNullOrEmpty(IList list)
         {

@@ -2,7 +2,7 @@
 
 namespace UBootstrap
 {
-    static public class EnumHelper
+    static public partial class EnumHelper
     {
         public static int EnumToInt (Enum e)
         {

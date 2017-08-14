@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UBootstrap
 {
-    public static class ReflectionHelper
+    static public partial class ReflectionHelper
     {
         // from http://answers.unity3d.com/questions/206665/typegettypestring-does-not-work-in-unity.html
         public static Type GetType (string typeName)
@@ -18,7 +18,7 @@ namespace UBootstrap
             if (currentAssembly == null)
                 return null;
 
-            // If we still haven't found the proper type, we can enumerate all of the 
+            // If we still haven't found the proper type, we can enumerate all of the
             // loaded assemblies and see if any of them define the type
 
             var referencedAssemblies = currentAssembly.GetReferencedAssemblies ();
@@ -29,7 +29,6 @@ namespace UBootstrap
                     if (type != null) {
                         return type;
                     }
-                        
                 }
             }
 
@@ -39,4 +38,3 @@ namespace UBootstrap
 
     }
 }
-

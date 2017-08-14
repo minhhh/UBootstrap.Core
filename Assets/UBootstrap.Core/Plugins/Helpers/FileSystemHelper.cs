@@ -9,7 +9,7 @@ using UnityEditor;
 
 namespace UBootstrap
 {
-    public static class FileSystemHelper
+    static public partial class FileSystemHelper
     {
         #if UNITY_EDITOR
         /// <summary>

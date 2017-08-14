@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace UBootstrap
 {
-    static public class VectorHelper
+    static public partial class VectorHelper
     {
         public static Vector3 WithX (this Vector3 vec, float x)
         {

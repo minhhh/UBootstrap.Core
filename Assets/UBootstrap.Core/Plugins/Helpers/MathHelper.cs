@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace UBootstrap
 {
-    static public class MathHelper
+    static public partial class MathHelper
     {
         /// <summary>
         /// Round to nearest multiples of steps. For instance, 3 rounded to nearest 5 results in 5,
