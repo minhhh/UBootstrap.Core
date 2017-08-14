@@ -22,6 +22,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.13**
+
+* Improve VectorHelper
+
 **0.0.12**
 
 * Improve EnumHelper
