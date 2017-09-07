@@ -36,5 +36,54 @@ namespace UBootstrap
             return null;
         }
 
+        public static MethodInfo GetMethodRecursive (object o, string methodName)
+        {
+            Type type = o.GetType ();
+            MethodInfo m = null;
+
+            while (type != null) {
+                m = type.GetMethod (methodName, BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic);
+
+                if (m != null) {
+                    return m;
+                } else {
+                    type = type.BaseType;
+                }
+            }
+
+            return m;
+        }
+
+        public static object CreateDelegate (Type T, object o, string methodName)
+        {
+            MethodInfo m = GetMethodRecursive (o, methodName);
+
+            if (m != null) {
+                try {
+                    return Delegate.CreateDelegate (T, o, m);
+                } catch (Exception e) {
+                    Debug.LogError ("CreateDelegate method not compatible " + methodName + " " + e.StackTrace);
+                }
+            }
+
+            return null;
+        }
+
+        public static T CreateDelegate <T> (object o, string methodName) where T : class
+        {
+            MethodInfo m = GetMethodRecursive (o, methodName);
+
+            if (m != null) {
+                try {
+                    return Delegate.CreateDelegate (typeof(T), o, m) as T;
+                } catch (Exception e) {
+                    Debug.LogError ("CreateDelegate method not compatible " + methodName + " " + e.StackTrace);
+                }
+            }
+
+            return null;
+        }
+
+
     }
 }

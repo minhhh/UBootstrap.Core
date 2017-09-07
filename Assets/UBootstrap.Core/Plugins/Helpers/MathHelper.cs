@@ -16,6 +16,26 @@ namespace UBootstrap
         {
             return Mathf.Round (value / step) * step;
         }
+
+        public static bool ApproximatelyEqual (float a, float b)
+        {
+            return Mathf.Abs (a - b) < Mathf.Epsilon;
+        }
+
+        public static double Abs (double d)
+        {
+            return d > 0 ? d : -d;
+        }
+
+        public static bool IsZero (double d)
+        {
+            return Abs (d) < Mathf.Epsilon;
+        }
+
+        public static bool IsZero (float d)
+        {
+            return Mathf.Abs (d) < Mathf.Epsilon;
+        }
     }
 
 }
