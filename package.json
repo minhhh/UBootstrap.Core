@@ -1,7 +1,7 @@
 {
   "name": "uboostrap-core",
-  "version": "0.0.15",
-  "description": "This library lets you draw properties nicely in Unity Editor",
+  "version": "0.0.16",
+  "description": "This is a core package of the UBootstrap series of libraries used for easily bootstraping a new Unity project.",
   "main": "index.js",
   "author": "Ha.Minh",
   "license": "MIT",
