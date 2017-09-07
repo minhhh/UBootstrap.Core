@@ -22,7 +22,11 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
-**0.0.14**
+**0.0.16**
+
+* Bump version
+
+**0.0.15**
 
 * Update MathHelper and ReflectionHelper
 
