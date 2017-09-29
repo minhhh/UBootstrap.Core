@@ -1,6 +1,6 @@
 {
   "name": "uboostrap-core",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "This is a core package of the UBootstrap series of libraries used for easily bootstraping a new Unity project.",
   "main": "index.js",
   "author": "Ha.Minh",
