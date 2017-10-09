@@ -1,6 +1,6 @@
 {
     "assets": [
-        "UBootstrap.Core"
+        "Plugins/UBootstrap.Core"
     ]
 }
 
