@@ -22,6 +22,14 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.20**
+
+* Improve `ReflectionHelper`
+
+**0.0.19**
+
+* Move to inside `Plugins`
+
 **0.0.18**
 
 * Add Easing

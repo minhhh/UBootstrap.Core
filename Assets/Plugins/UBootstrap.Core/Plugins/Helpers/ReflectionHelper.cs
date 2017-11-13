@@ -14,6 +14,11 @@ namespace UBootstrap
             if (type != null)
                 return type;
 
+            type = Type.GetType (typeName + ",Assembly-CSharp");
+
+            if (type != null)
+                return type;
+
             var currentAssembly = Assembly.GetExecutingAssembly ();
             if (currentAssembly == null)
                 return null;
@@ -30,6 +35,12 @@ namespace UBootstrap
                         return type;
                     }
                 }
+            }
+
+            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies()) {
+                type = a.GetType(typeName);
+                if (type != null)
+                    break;
             }
 
             // The type just couldn't be found...

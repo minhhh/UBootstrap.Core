@@ -35,7 +35,7 @@ namespace UBootstrap
         // Slow. Don't use in Update
         public static GameObject Find (string name)
         {
-            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
             Object o;
             for (int i = 0; i < objects.Length; i++) {
                 o = objects [i];
@@ -49,7 +49,7 @@ namespace UBootstrap
         // Slow. Don't use in Update
         public static T FindObjectOfType<T> () where T:Object
         {
-            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(T));
+            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(T));
             Object o;
             for (int i = 0; i < objects.Length; i++) {
                 o = objects [i];
@@ -63,7 +63,7 @@ namespace UBootstrap
         // Slow. Don't use in Update
         public static Object FindObjectOfType (System.Type T)
         {
-            Object [] objects = Resources.FindObjectsOfTypeAll (T);
+            Object[] objects = Resources.FindObjectsOfTypeAll (T);
             Object o;
             for (int i = 0; i < objects.Length; i++) {
                 o = objects [i];
@@ -77,7 +77,7 @@ namespace UBootstrap
         // Slow. Don't use in Update
         public static T[] FindObjectsOfType<T> () where T:Object
         {
-            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(T));
+            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(T));
             Object o;
             var results = new List<T> ();
             for (int i = 0; i < objects.Length; i++) {
@@ -93,7 +93,7 @@ namespace UBootstrap
         // Slow. Don't use in Update
         public static Object[] FindObjectsOfType (System.Type T)
         {
-            Object [] objects = Resources.FindObjectsOfTypeAll (T);
+            Object[] objects = Resources.FindObjectsOfTypeAll (T);
 
             Object o;
             var results = new List<Object> ();
@@ -110,14 +110,14 @@ namespace UBootstrap
         // Slow. Don't use in Update
         public static GameObject FindGameObjectWithTag (string tag)
         {
-            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
             return objects.Select (go => go as GameObject).First (go => go.CompareTag (tag) && !IsPrefab (go));
         }
 
         // Slow. Don't use in Update
         public static GameObject[] FindGameObjectsWithTag (string tag)
         {
-            Object [] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+            Object[] objects = Resources.FindObjectsOfTypeAll (typeof(GameObject));
             return objects.Select (go => go as GameObject).Where (go => go.CompareTag (tag) && !IsPrefab (go)).ToArray ();
         }
 
@@ -129,6 +129,14 @@ namespace UBootstrap
         public static bool IsNotNull (object o)
         {
             return !IsNull (o);
+        }
+
+        public static void RemoveAllChildren (Transform transform)
+        {
+            int total = transform.childCount;
+            for (int i = total - 1; i >= 0; i--) {
+                Object.Destroy (transform.GetChild (i).gameObject);
+            }
         }
     }
 }
