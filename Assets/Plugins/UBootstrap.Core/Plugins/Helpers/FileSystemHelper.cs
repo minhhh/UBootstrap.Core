@@ -32,7 +32,7 @@ namespace UBootstrap
         public static void SaveToFileInAssets (string content, string path)
         {
             try {
-                File.WriteAllText (Path.Combine(Application.dataPath, path), content);
+                File.WriteAllText (Path.Combine (Application.dataPath, path), content);
                 AssetDatabase.Refresh ();
             } catch (Exception e) {
                 Debug.LogError ("An error occurred while saving file: " + e);
@@ -40,6 +40,34 @@ namespace UBootstrap
 
         }
         #endif
+
+        [MenuItem ("UBootstrap/Delete Device Cache")]
+        public static void DeleteDeviceCache ()
+        {
+            DeleteAllFilesAndFoldersInFolder (Application.persistentDataPath);
+            DeleteAllFilesAndFoldersInFolder (Application.temporaryCachePath);
+        }
+
+        public static void DeleteAllFilesAndFoldersInFolder (string directoryPath)
+        {
+            string[] directories = Directory.GetDirectories (directoryPath);
+            foreach (string path in directories) {
+                try {
+                    Directory.Delete (path, true);  
+                } catch (Exception e) {
+                    Debug.Log ("Cannot delete " + path + " [" + e.Message + "]");
+                }
+            }
+
+            string[] filePaths = Directory.GetFiles (directoryPath);
+            foreach (string path in filePaths) {
+                try {
+                    File.Delete (path);
+                } catch (Exception e) {
+                    Debug.Log ("Cannot delete " + path + " [" + e.Message + "]");
+                }
+            }
+        }
     }
 
 
