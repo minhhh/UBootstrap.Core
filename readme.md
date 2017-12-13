@@ -22,6 +22,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.23**
+
+* Fix compile issue due to `FileSystemHelper`
+
 **0.0.22**
 
 * Remove `Console`

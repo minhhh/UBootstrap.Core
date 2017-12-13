@@ -41,12 +41,14 @@ namespace UBootstrap
         }
         #endif
 
+        #if UNITY_EDITOR
         [MenuItem ("UBootstrap/Delete Device Cache")]
         public static void DeleteDeviceCache ()
         {
             DeleteAllFilesAndFoldersInFolder (Application.persistentDataPath);
             DeleteAllFilesAndFoldersInFolder (Application.temporaryCachePath);
         }
+        #endif
 
         public static void DeleteAllFilesAndFoldersInFolder (string directoryPath)
         {
