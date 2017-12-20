@@ -22,6 +22,10 @@ All the classes are documented [here](https://github.com/minhhh/UBootstrap.Core/
 
 ## Changelog
 
+**0.0.25**
+
+* Improve `ResourcePathStore`: Add `GetResourcePaths`
+
 **0.0.24**
 
 * Add `ResourcePathStore`

@@ -11,4 +11,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6039ffbe6ed814f4cac79498f1424bd7, type: 3}
   m_Name: ResourcePathStore
   m_EditorClassIdentifier: 
-  _resourcePathInfos: []
+  _resourcePathInfos:
+  - path: Assets/Settings/Resources/Settings/ResourcePathStore.asset
+    pathWithoutExtension: Assets/Settings/Resources/Settings/ResourcePathStore
+    folderPath: Assets/Settings/Resources/Settings
+    resourcePath: Settings/ResourcePathStore
+    guid: -250792
+  - path: Assets/Settings/Resources/Settings/ConstantGeneratorSetting.asset
+    pathWithoutExtension: Assets/Settings/Resources/Settings/ConstantGeneratorSetting
+    folderPath: Assets/Settings/Resources/Settings
+    resourcePath: Settings/ConstantGeneratorSetting
+    guid: 10232
+  - path: Assets/Resources/Settings/Resources/2.png
+    pathWithoutExtension: Assets/Resources/Settings/Resources/2
+    folderPath: Assets/Resources/Settings/Resources
+    resourcePath: Settings/Resources/2
+    guid: 12674
+  - path: Assets/Resources/PathSetting.asset
+    pathWithoutExtension: Assets/Resources/PathSetting
+    folderPath: Assets/Resources
+    resourcePath: PathSetting
+    guid: 10306
+  - path: Assets/Resources/Settings/1.png
+    pathWithoutExtension: Assets/Resources/Settings/1
+    folderPath: Assets/Resources/Settings
+    resourcePath: Settings/1
+    guid: 12318

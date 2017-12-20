@@ -89,8 +89,13 @@ namespace UBootstrap
 
         protected List<ResourcePathInfo> _GetResourcePathInfos (string path, bool topLevelOnly = true)
         {
-            path = Path.GetDirectoryName (path);
-            var pathWithSep = path + Path.DirectorySeparatorChar;
+            string pathWithSep = string.Empty;
+            if (path.EndsWith(Path.DirectorySeparatorChar.ToString ())) {
+                path = Path.GetDirectoryName (path);
+                pathWithSep = path;
+            } else {
+                pathWithSep = path + Path.DirectorySeparatorChar;
+            }
 
             var result = new List<ResourcePathInfo> ();
             if (topLevelOnly) {
@@ -159,6 +164,24 @@ namespace UBootstrap
         {
             var rpis = _GetResourcePathInfos (path, topLevelOnly);
             return rpis.Select (x => Resources.Load (x.resourcePath, systemTypeInstance)).Where (x => x != null).ToArray ();
+        }
+
+        public string[] GetResourcePaths (string path, bool topLevelOnly = true)
+        {
+            var rpis = _GetResourcePathInfos (path, topLevelOnly);
+            return rpis.Select (x => x.pathWithoutExtension).ToArray ();
+        }
+
+        public string[] GetResourcePaths <T> (string path, bool topLevelOnly = true)  where T : UnityEngine.Object
+        {
+            var rpis = _GetResourcePathInfos (path, topLevelOnly);
+            return rpis.Where (x => (Resources.Load<T> (x.resourcePath) != null)).Select (x => x.pathWithoutExtension).ToArray ();
+        }
+
+        public string[] GetResourcePaths (string path, Type systemTypeInstance, bool topLevelOnly = true)
+        {
+            var rpis = _GetResourcePathInfos (path, topLevelOnly);
+            return rpis.Where (x => (Resources.Load (x.resourcePath, systemTypeInstance) != null)).Select (x => x.pathWithoutExtension).ToArray ();
         }
     }
 }
