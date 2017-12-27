@@ -14,7 +14,7 @@ This is a core package of the UBootstrap series of libraries used for easily boo
 4. Run `npm run unity` and wait for it to install all necessary packages
 
 
-To open this project on its own, run `rm -fr node_modules && DIR=``pwd`` yarn install --flat --verbose` to install `devDependencies` as well.
+To open this project on its own, run ``rm -fr node_modules && DIR=`pwd` yarn install --flat --verbose`` to install `devDependencies` as well.
 
 ## Documentation
 
