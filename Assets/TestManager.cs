@@ -13,7 +13,7 @@ public class TestManager : MonoBehaviour
         Debug.Log (GameObjectHelper.FindObjectOfType (typeof(AComponent)));
         Debug.Log (GameObjectHelper.FindObjectsOfType <AComponent> ());
         Debug.Log (GameObjectHelper.FindObjectsOfType (typeof(AComponent)));
-
+        Debug.Log (StringHelper.PadDigit (121, 2));
     }
 
 	

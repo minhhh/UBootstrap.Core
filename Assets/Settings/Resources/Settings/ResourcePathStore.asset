@@ -16,24 +16,24 @@ MonoBehaviour:
     pathWithoutExtension: Assets/Settings/Resources/Settings/ResourcePathStore
     folderPath: Assets/Settings/Resources/Settings
     resourcePath: Settings/ResourcePathStore
-    guid: -250792
+    guid: 10310
   - path: Assets/Settings/Resources/Settings/ConstantGeneratorSetting.asset
     pathWithoutExtension: Assets/Settings/Resources/Settings/ConstantGeneratorSetting
     folderPath: Assets/Settings/Resources/Settings
     resourcePath: Settings/ConstantGeneratorSetting
-    guid: 10232
+    guid: 10330
   - path: Assets/Resources/Settings/Resources/2.png
     pathWithoutExtension: Assets/Resources/Settings/Resources/2
     folderPath: Assets/Resources/Settings/Resources
     resourcePath: Settings/Resources/2
-    guid: 12674
+    guid: 10398
   - path: Assets/Resources/PathSetting.asset
     pathWithoutExtension: Assets/Resources/PathSetting
     folderPath: Assets/Resources
     resourcePath: PathSetting
-    guid: 10306
+    guid: 10414
   - path: Assets/Resources/Settings/1.png
     pathWithoutExtension: Assets/Resources/Settings/1
     folderPath: Assets/Resources/Settings
     resourcePath: Settings/1
-    guid: 12318
+    guid: 10504
