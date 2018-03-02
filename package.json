@@ -19,6 +19,6 @@
     "ncp": "ssh://github.com/AvianFlu/ncp.git#v2.0.0"
   },
   "devDependencies": {
-    "unitytesttool": "ssh://github.com/minhhh/unitytesttools.git#v0.0.1"
+    "unitytesttool": "ssh://github.com/minhhh/unitytesttools.git#v1.5.6"
   }
 }
